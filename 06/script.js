@@ -3,11 +3,11 @@ function maxDistance(movements) {
     var any = movements.length;
     movements = movements.replaceAll('*', '');
     any -= movements.length;
-    for (var i = 0; i < movements.length; i++) {
-        mov += movements.charCodeAt(i) - 61;
+    for (var _i = 0, movements_1 = movements; _i < movements_1.length; _i++) {
+        var move = movements_1[_i];
+        mov += move.charCodeAt(0) - 61;
     }
     mov = Math.abs(mov);
-    console.log(any, movements);
     mov += any;
     return mov;
 }

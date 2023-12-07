@@ -3,9 +3,9 @@ function maxDistance(movements: string): number {
   let any = movements.length;
 	movements = movements.replaceAll('*', '');
   any -= movements.length;
-	for (let i = 0; i < movements.length; i++){
-    mov += movements.charCodeAt(i) - 61;
-  }
+	for (const move of movements) {
+		mov += move.charCodeAt(0) - 61;
+	}
 	mov = Math.abs(mov);
 	mov += any;
 	return mov;
