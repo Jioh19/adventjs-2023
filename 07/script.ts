@@ -1,27 +1,21 @@
 function drawGift(size: number, symbol: String): string {
-	const result: string[] = [];
+	if (size < 2) return '#\n';
+	const result: string[] = new Array(size * 2);
 	const start: string = ' '.repeat(size - 1) + '#'.repeat(size);
-	result.push(start);
+	result[0] = start;
 	for (let i = 0; i < size - 2; i++) {
-		if (size - 2 - i < 0) continue;
-		let inner: string =
-			' '.repeat(size - 2 - i) + '#' + symbol.repeat(size - 2);
-		inner += '#' + symbol.repeat(i) + '#';
-		result.push(inner);
-	}
+		let up: string = ' '.repeat(size - 2 - i) + '#' + symbol.repeat(size - 2);
+		up += '#' + symbol.repeat(i) + '#';
+		result[i + 1] = up;
 
-	if (size - 1 > 0) {
-		const mid: string = '#'.repeat(size) + symbol.repeat(size - 2) + '#';
-		result.push(mid);
-
-		for (let i = 0; i < size - 2; i++) {
-			let inner: string ='#' + symbol.repeat(size - 2) + '#';
-			inner += symbol.repeat(size - 3 - i) + '#';
-			result.push(inner);
-		}
+		let lo: string = '#' + symbol.repeat(size - 2) + '#';
+		lo += symbol.repeat(size - 3 - i) + '#';
+		result[size + i] = lo;
 	}
-	if (size - 2 >= 0) result.push(start.split('').reverse().join('').trim());
-	result.push('');
+	const mid: string = '#'.repeat(size) + symbol.repeat(size - 2) + '#';
+	result[size - 1] = mid;
+	result[size * 2 - 2] = '#'.repeat(size);
+	result[size * 2 - 1] = '';
 	return result.join('\n');
 }
 
