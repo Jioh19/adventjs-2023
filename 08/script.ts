@@ -1,23 +1,17 @@
-function organizeGifts(gifts: string): string {
+function organizeGifts(gifts) {
 	const amounts = gifts.match(/\d+[a-z]/g);
-
-	const resultArray: string[] = [];
+	let resultArray = '';
 
 	for (const gift of amounts) {
-		const c = gift[gift.length - 1];
-		const amount: number = Number(gift.slice(0, -1));
-		const pallet = amount / 50;
-		const box = (amount % 50) / 10;
+		const c = gift.at(-1);
+		const amount = Number.parseInt(gift);
 		const unit = amount % 10;
 		const sUnit = '(' + c.repeat(unit) + ')';
-		const palletStr = `[${c}]`.repeat(pallet);
-		const boxStr = `{${c}}`.repeat(box);
-		const unitStr = sUnit.repeat(unit > 0);
-
-		resultArray.push(palletStr + boxStr + unitStr);
+		resultArray += `[${c}]`.repeat(amount / 50);
+		resultArray += `{${c}}`.repeat((amount % 50) / 10);
+		resultArray += sUnit.repeat(unit > 0);
 	}
-
-	return resultArray.join('');
+	return resultArray;
 }
 
 const result1 = organizeGifts(`76a11b`);
