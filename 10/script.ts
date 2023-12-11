@@ -9,10 +9,10 @@ function createChristmasTree(ornaments: string, height: number) {
 	for (const i of arr) {
 		result += ' '.repeat(height - 1 - i);
 		result += decorations.slice(index, index + i * 2 + 1) + '\n';
-		index += i * 2;
+		index += (i + 1) * 2;
 	}
-	result += ' '.repeat(height - 1) + '|';
+	result += ' '.repeat(height - 1) + '|\n';
 	return result;
 }
 
-console.log(createChristmasTree('123', 5));
+console.log(createChristmasTree('123', 4));
