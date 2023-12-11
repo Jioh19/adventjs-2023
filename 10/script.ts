@@ -1,18 +1,17 @@
-function createChristmasTree(ornaments: string, height: number): string {
-	let result = ' '.repeat(height - 1);
-	let counter = 1;
-
-	for (let i = 0; i < (height * (height + 1)) / 2; i++) {
-		if ((counter * (counter + 1)) / 2 == i) {
-			counter++;
-			result = result.slice(0, -1);
-			result += '\n' + ' '.repeat(height - counter);
-		}
-		result += `${ornaments[i % ornaments.length]} `;
+function createChristmasTree(ornaments: string, height: number) {
+	let decoration = ornaments.split('').join(' ') + ' ';
+	let totalDecoration = (height * (height + 1)) / 2;
+	totalDecoration /= ornaments.length;
+	let decorations = decoration.repeat(totalDecoration + 1);
+	let index = 0;
+	const arr = Array.from({ length: height }).keys();
+	let result = '';
+	for (const i of arr) {
+		result += ' '.repeat(height - 1 - i);
+		result += decorations.slice(index, index + i * 2 + 1) + '\n';
+		index += i * 2;
 	}
-	result = result.slice(0, -1);
-	result += '\n' + ' '.repeat(height - 1) + '|\n';
-
+	result += ' '.repeat(height - 1) + '|';
 	return result;
 }
 
