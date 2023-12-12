@@ -1,23 +1,15 @@
 function checkIsValidCopy(original, copy) {
-	const ori = ['#', '+', ':', '.'];
-	const cop = ['#', '+', ':', '.', ' '];
-	original = original.toLowerCase();
-	let i = 0;
-	for (const w of original) {
-		if (w != copy[i]) {
-			if (w == ' ') return false;
-			let oriIndex = ori.indexOf(w);
-			let copyIndex = oriIndex + 1;
-			// console.log(w, copy[i])
-			if (!cop.slice(copyIndex).includes(copy[i])) {
-				return false;
-			}
-		}
-		i++;
-	}
-	return true;
+    var o = ['#', '+', ':', '.'];
+    var c = ['#', '+', ':', '.', ' '];
+    original = original.toLowerCase();
+    var i = 0;
+    for (var _i = 0, original_1 = original; _i < original_1.length; _i++) {
+        var w = original_1[_i];
+        var co = c.slice(o.indexOf(w) + 1).includes(copy[i]);
+        if (w != copy[i] && (!co || w == ' ')) {
+            return false;
+        }
+        i++;
+    }
+    return true;
 }
-
-//console.log(checkIsValidCopy('Santa Claus', 's#### c####'));  //true
-//console.log(checkIsValidCopy('Santa Claus', 'sant##claus+')); //false
-console.log(checkIsValidCopy('Santa Claus', 's#+:. c:. s')); //true
