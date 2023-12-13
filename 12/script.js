@@ -1,15 +1,20 @@
 function checkIsValidCopy(original, copy) {
-    var o = ['#', '+', ':', '.'];
-    var c = ['#', '+', ':', '.', ' '];
-    original = original.toLowerCase();
-    var i = 0;
-    for (var _i = 0, original_1 = original; _i < original_1.length; _i++) {
-        var w = original_1[_i];
-        var co = c.slice(o.indexOf(w) + 1).includes(copy[i]);
-        if (w != copy[i] && (!co || w == ' ')) {
-            return false;
-        }
-        i++;
-    }
-    return true;
+	const o = ['#', '+', ':', '.'];
+	const c = ['#', '+', ':', '.', ' '];
+	let i = 0;
+	for (const w of original) {
+		if (w != copy[i] && w.toLowerCase() != copy[i]) {
+			//console.log( w, copy[i], i);
+			const co = c.slice(o.indexOf(w) + 1).includes(copy[i]);
+			if (!co || w == ' ') {
+				return false;
+			}
+		}
+		i++;
+	}
+	return true;
 }
+
+console.log(checkIsValidCopy('S#n:a Claus', 'S#+:. c:. s'));
+console.log(checkIsValidCopy('Santa Claus is coming', 'p#nt: cla#s #s c+min#'));
+console.log(checkIsValidCopy('S#nta Claus', 'S#ntA ClauS'));
