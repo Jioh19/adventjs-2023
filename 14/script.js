@@ -1,20 +1,18 @@
 function maxGifts(houses) {
   const n = houses.length;
-	const dp = new Array(n).fill(0);
-	dp[0] = houses[0];
-	dp[1] = Math.max(houses[0], houses[1]);
+  let max1 = houses[0]
+  let max2 = (houses[0] < houses[1])? houses[1]: houses[0] 
 
-  let i = 2;
-  for(const house of houses) {
-    dp[i] = Math.max(dp[i - 1], dp[i - 2] + houses[i]);
-
+  for(let i = 2; i < houses.length; i++) {
+    let aux = max2
+    max2 = (max2 < max1 + houses[i])?  max1 + houses[i]: max2;
+    max1 = aux
   }
-
 
   const set = [
       0,
       houses[0],
-      dp[n-1]
+      max2
     ]
     return set[+(n>0) +(n>1) ]
 }
