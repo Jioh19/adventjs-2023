@@ -2,23 +2,29 @@ function getIndexsForPalindrome(word) {
 	const len = word.length;
 	const arr = [];
 	const arr2 = new Array(Number.parseInt(len / 2)).fill(0);
-	let result = 0;
-
-	// Convert the string to lowercase to make the palindrome check case-insensitive
-	const lowerCaseWord = word.toLowerCase();
-
-	// Iterate through each character in the wording
-	for (let i = 0; i < lowerCaseWord.length; i++) {
-		// Use XOR (^) to toggle the result value based on the ASCII code of the character
-		result ^=
-			lowerCaseWord.charCodeAt(i) ^
-			lowerCaseWord.charCodeAt(lowerCaseWord.length - 1 - i);
+	for (const [i, zero] of arr2.entries()) {
+		if (word[i] != word[len - i - 1]) {
+			arr.push(i, len - i - 1);
+		}
 	}
+	let p;
 
-	// If the wording is a palindrome, the result will be 0
-	return result === 0;
+	if (arr.length == 2 && word.length %2 != 0) {
+		p = len / 2 - 0.5;
+		const lengthTwo = [
+			[arr[0], p],
+			[p, arr[1]],
+		];
+		return lengthTwo[+(word[arr[0]] == word[p])];
+	}
+	if (arr.length == 4 && word.length % 2 == 0) {
+		if (word[arr[1]] == word[arr[2]]) {
+			return [arr[0], arr[2]];
+		}
+	}
+	const aux = [null, []];
+	return aux[+(arr.length == 0)];
 }
-
 
 console.log(getIndexsForPalindrome('abab'));
 console.log(getIndexsForPalindrome('aaaabaaaa'));
@@ -26,3 +32,4 @@ console.log(getIndexsForPalindrome('rasdfdsaf'));
 console.log(getIndexsForPalindrome('aaababa'));
 console.log(getIndexsForPalindrome('rotaratov'));
 console.log(getIndexsForPalindrome('saippuakivikauppias'));
+console.log(getIndexsForPalindrome('ba'));
