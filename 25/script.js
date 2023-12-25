@@ -1,6 +1,6 @@
-function travelDistance(map: string) {
-	let len = map.indexOf('\n') + 1;
-	len ||= map.length;
+function travelDistance(map) {
+	let len = map.indexOf('\n') +1;
+    len ||= map.length;
 	const chars = [...map.matchAll('[1-9S]')];
 	chars.sort();
 	let moves = 0;
@@ -15,3 +15,12 @@ function travelDistance(map: string) {
 	}
 	return moves;
 }
+
+const map = `.....1....
+..S.......
+..........
+....3.....
+......2...`;
+
+//console.log(travelDistance(map));
+console.log(travelDistance(`S12....3`));
